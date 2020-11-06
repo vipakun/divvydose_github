@@ -21,3 +21,10 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+
+### `Notes`
+This is a pretty silly implement. 
+1. UI: I just set up the rebassjs and added a very few styles to the components. I think this is more like a demostration. 
+2. Search Function: The seach filter requires to type in the whole word. For example, `Add` or `Fix`. 
+
