@@ -32,10 +32,7 @@ const PullRequests = () => {
       let searchTitle = _data.title.toLowerCase();
       return JSON.stringify(searchTitle).toLowerCase().includes(searchTerm.toLowerCase());
     });
-    if(searchTerm === '') {
-      setFilteredData(data);
-    }
-    setFilteredData(filtered);
+    searchTerm === '' ? setFilteredData(data) : setFilteredData(filtered);
   }
 
   React.useEffect(() => {
@@ -45,6 +42,7 @@ const PullRequests = () => {
       .then(data => {
         setLoading(false);
         setData(data);
+        setFilteredData(data);
       })
       .catch(e=> {
         setLoading(false);
