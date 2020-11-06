@@ -9,7 +9,8 @@ import {
   Box,
   Flex,
   Heading,
-} from 'rebass'
+} from 'rebass';
+import { Input } from '@rebass/forms';
 
 const theme = {
   ...preset,
@@ -51,11 +52,11 @@ const PullRequests = () => {
           Divvydose Rull Requests:
         </Heading>
         <Loader 
-        type='Puff'
-        color='#00BFFF'
-        height={100}
-        width={100}
-      />
+          type='Puff'
+          color='#00BFFF'
+          height={100}
+          width={100}
+        />
       </Box>
     </ThemeProvider>
     )
@@ -76,7 +77,7 @@ const PullRequests = () => {
         <Heading as='h1' mb={4} sx={{color: 'peru'}}>
           Divvydose Rull Requests:
         </Heading>
-
+        <Input type='text' placeholder='Search'/>
         <Flex flexDirection='column'>
           {data.map(item => (         
             <SinglePullRequest item={item} key={item.id}/>
