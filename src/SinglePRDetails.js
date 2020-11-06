@@ -1,17 +1,77 @@
-import React, { useState, useEffect } from 'react';
-import {useLocation} from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const SinglePRDetails = ({ match, location }) => {
-  const { params: {prId}} = match;
-  // const [loading, setLoading] = React.useState(true);
-  // const [error, setError] = React.useState('');
-  // const [data, setData] = React.useState([]);
-  
-  const singlePRUrl = location.state.item.url;
-  console.log('data in SinglePRDetails: ',  location.state.item.url);
-  // console.log('match: ', match);
-  
-  return <div>Details </div>
+import {
+  Box,
+  Flex,
+  Text,
+  Link as StyledLink,
+  Image,
+} from 'rebass'
+
+const SinglePRDetails = ({ location }) => {
+  console.log('LOCATION: ', location)
+  const prData = location.state.item;
+  const {  body, created_at, state, user: {login, avatar_url, url} } = prData;  
+
+  return (
+    <Box>
+      <Flex
+        px={2}
+        color='#D3D3D3'
+        bg='black'
+        alignItems='center'
+        >
+        <Text p={2} fontWeight='bold'>{login}</Text>
+        <Box mx='auto' />
+        <Link to='/' style={{color: '#D3D3D3'}}>
+          Back
+        </Link>
+      </Flex>  
+      <Box 
+        sx={{px: 3, pt:3, fontSize: 20, py: 3}}
+      >
+      <Image 
+        src={avatar_url}
+        sx={{
+          width: 50,
+          height: 50,
+          borderRadius: 9999,
+        }}
+      />
+      <Text
+        sx={{
+          fontSize: 20,
+          py: 3,
+        }}
+      >
+        {body}
+      </Text>
+      <Text
+        sx={{
+          fontSize: 20,
+          py: 3,
+        }}
+      >
+        PR Created Date/Time: {created_at}
+      </Text>
+      <Text
+        sx={{
+          fontSize: 20,
+          py: 3,
+        }}
+      >
+        PR State: {state}
+      </Text>
+      <Flex>
+        <StyledLink variant='nav' href={url} sx={{color: 'peru'}}>
+            Know More about author?
+        </StyledLink>
+      </Flex>
+      </Box>
+    </Box>
+    
+  )
 };
 
 export default SinglePRDetails;
