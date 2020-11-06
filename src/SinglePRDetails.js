@@ -10,7 +10,6 @@ import {
 } from 'rebass'
 
 const SinglePRDetails = ({ location }) => {
-  console.log('LOCATION: ', location)
   const prData = location.state.item;
   const {  body, created_at, state, user: {login, avatar_url, url} } = prData;  
 

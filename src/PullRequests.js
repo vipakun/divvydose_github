@@ -23,6 +23,20 @@ const PullRequests = () => {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState('');
   const [data, setData] = React.useState([]);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [filteredData, setFilteredData] = React.useState(data);
+
+  const handleSearchTermChange = event => {
+    setSearchTerm(event.target.value);
+    let filtered = data.filter(  _data => {
+      let searchTitle = _data.title.toLowerCase();
+      return JSON.stringify(searchTitle).toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    if(searchTerm === '') {
+      setFilteredData(data);
+    }
+    setFilteredData(filtered);
+  }
 
   React.useEffect(() => {
     setLoading(true);
@@ -31,14 +45,13 @@ const PullRequests = () => {
       .then(data => {
         setLoading(false);
         setData(data);
-        console.log(data);
       })
       .catch(e=> {
         setLoading(false);
         setError('fetch failed');
       });
   }, []);
-
+  
   if (loading) {
     return (
       <ThemeProvider theme={theme}>
@@ -77,9 +90,19 @@ const PullRequests = () => {
         <Heading as='h1' mb={4} sx={{color: 'peru'}}>
           Divvydose Rull Requests:
         </Heading>
-        <Input type='text' placeholder='Search'/>
+        <Input 
+          type='text' 
+          placeholder='Search'
+          sx={{
+            mx: 'auto',
+            my: 3,
+            px: 3,
+          }}
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+        />
         <Flex flexDirection='column'>
-          {data.map(item => (         
+          {filteredData.map(item => (         
             <SinglePullRequest item={item} key={item.id}/>
           ))}
         </Flex>

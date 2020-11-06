@@ -9,8 +9,8 @@ import {
 } from 'rebass'
 
 const SinglePullRequest = ({item}) => {
-  const {title, created_at, id, url, labels = []} = item;
-  console.log('SingleRullRequest: ', url);
+  const {title, created_at, id, labels = []} = item;
+
   return (
     <Card 
       mb={4}
